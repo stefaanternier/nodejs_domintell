@@ -20,10 +20,14 @@ var send = function(messageString) {
 	});
 }
 
-var login = function () {
+exports.login = function () {
     send('LOGIN');
 }
-login();
+exports.login();
+
+exports.logout = function () {
+    send('LOGOUT');
+}
 
 exports.appinfo = function () {
     send('APPINFO');
