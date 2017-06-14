@@ -53,7 +53,9 @@ exports.ping = function (id) {
 
 client.on('message', (msg, rinfo) => {
     toParse =  msg.toString();
-    if (toParse.indexOf(']')!= 0){
+    console.log('toParse ' +toParse)
+    if (toParse.indexOf(']')!= -1){
+
         if (toParse.indexOf('BIR') == 0) {
             id = toParse.substr(4,7).trim();
             desc = toParse.substr(11);
@@ -70,7 +72,7 @@ client.on('message', (msg, rinfo) => {
     } else
 
     if (msg.toString().indexOf('BIR')==0) {
-        
+        console.log('check ' +toParse)
         id = toParse.substr(5,4);
         
         status = toParse.substr(10,2);
