@@ -46,6 +46,9 @@ exports.screens = function (id) {
     send('TRV  ' + id);
 }
 
+exports.allOff = function (id) {
+    send('MEM000006%O' );
+}
 
 exports.ping = function (id) {
     send('PING');

@@ -63,6 +63,12 @@ server.get('/logout', function (req, res, next) {
 	return next();
 });
 
+server.get('/allOff', function (req, res, next) {
+	domi.allOff();
+	res.send('ok');
+	return next();
+});
+
 server.listen(8980, function () {
 	console.log('%s listening at %s', server.name, server.url);
 });
