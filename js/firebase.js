@@ -22,3 +22,20 @@ exports.dom_event = function (message) {
 		eventname: message.toString()
 	});
 }
+exports.record_module_description = function(id, desc) {
+	var ref = db.ref("modules");
+	
+	var object = {};
+	object[id] = desc;
+	ref.update(object);
+}
+
+exports.record_event = function(id, status) {
+    var ref = db.ref("status");
+	if (status == 1) {status = true}else {status = false}
+	var object = {};
+	object[id] = status;
+	ref.update(object);
+}
+
+//exports.record_event('testid2', 'value');
