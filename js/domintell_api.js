@@ -60,7 +60,7 @@ client.on('message', (msg, rinfo) => {
 
     if (toParse.indexOf('INFO:Session timeout:INFO') !== -1) {
 		console.log('time-out detected');
-		login();
+		exports.login();
 	} 	else    if (toParse.indexOf(']')!= -1){
 
         if (toParse.indexOf('BIR') == 0) {
