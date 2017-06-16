@@ -5,12 +5,12 @@ var client = dgram.createSocket('udp4');
 exports.client = client;
 var firebase = require('./firebase');
 
-client.on('message', (msg, rinfo) => {
-	if (msg.toString().indexOf('INFO:Session timeout:INFO') !== -1) {
-		console.log('time-out detected');
-		login();
-	} 	
-});
+// client.on('message', (msg, rinfo) => {
+// 	if (msg.toString().indexOf('INFO:Session timeout:INFO') !== -1) {
+// 		console.log('time-out detected');
+// 		login();
+// 	} 	
+// });
 
 var send = function(messageString) {
     var message = new Buffer(messageString);
@@ -57,7 +57,11 @@ exports.ping = function (id) {
 client.on('message', (msg, rinfo) => {
     toParse =  msg.toString();
     console.log('toParse ' +toParse)
-    if (toParse.indexOf(']')!= -1){
+
+    if (toParse.indexOf('INFO:Session timeout:INFO') !== -1) {
+		console.log('time-out detected');
+		login();
+	} 	else    if (toParse.indexOf(']')!= -1){
 
         if (toParse.indexOf('BIR') == 0) {
             id = toParse.substr(4,7).trim();
