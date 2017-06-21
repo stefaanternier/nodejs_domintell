@@ -4,13 +4,7 @@ var dgram = require('dgram');
 var client = dgram.createSocket('udp4');
 exports.client = client;
 var firebase = require('./firebase');
-
-// client.on('message', (msg, rinfo) => {
-// 	if (msg.toString().indexOf('INFO:Session timeout:INFO') !== -1) {
-// 		console.log('time-out detected');
-// 		login();
-// 	} 	
-// });
+// import {firebase} from './firebase';
 
 var send = function(messageString) {
     var message = new Buffer(messageString);
@@ -20,39 +14,24 @@ var send = function(messageString) {
 	});
 }
 
-exports.login = function () {
-    send('LOGIN');
-}
+exports.login = () => send('LOGIN');
 exports.login();
 
-exports.logout = function () {
-    send('LOGOUT');
-}
+exports.logout =  () => {send('LOGOUT');}
 
-exports.appinfo = function () {
-    send('APPINFO');
-}
+exports.appinfo = function () { send('APPINFO');}
 
-exports.lights = function (id) {
-    send('BIR  ' + id);
-}
+exports.lights =  id => send('BIR  ' + id);
 
-exports.dim = function (id, perc) {
-    send('DIM  ' + id+'%D'+perc);
-}
+exports.dim =  (id, perc) => send('DIM  ' + id+'%D'+perc);
+
+exports.screens = (id) =>  send('TRV  ' + id);
 
 
-exports.screens = function (id) {
-    send('TRV  ' + id);
-}
+exports.allOff =  (id) => send('MEM000006%O' );
 
-exports.allOff = function (id) {
-    send('MEM000006%O' );
-}
+exports.ping = (id)=> send('PING');
 
-exports.ping = function (id) {
-    send('PING');
-}
 
 client.on('message', (msg, rinfo) => {
     toParse =  msg.toString();

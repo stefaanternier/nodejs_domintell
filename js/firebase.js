@@ -8,13 +8,8 @@ admin.initializeApp({
 });
 
 // The app only has access as defined in the Security Rules
-var db = admin.database();
-var eventsref = db.ref("/events");
-
-eventsref.set({
-	time: "now",
-	eventname: "test"
-});
+const db = admin.database();
+const eventsref = db.ref("/events");
 
 exports.dom_event = function (message) {
 	eventsref.push().set({
@@ -35,7 +30,17 @@ exports.record_event = function(id, status) {
 	if (status == 1) {status = true}else {status = false}
 	var object = {};
 	object[id] = status;
-	ref.update(object);
+	ref.child(id).once("value", (snapshot) =>{
+		
+		let rtime = 0 - new Date().getTime();
+		
+		console.log('rtime '+rtime);
+		  if (snapshot.val() !== status) {
+			eventsref.push({id:id, 
+				status: status, 
+				time: admin.database.ServerValue.TIMESTAMP,
+			    reverseTime: rtime});
+		  }
+		  ref.update(object);
+	});
 }
-
-//exports.record_event('testid2', 'value');
