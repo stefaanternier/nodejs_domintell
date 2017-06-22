@@ -25,10 +25,12 @@ exports.record_module_description = function(id, desc) {
 	ref.update(object);
 }
 
-exports.record_event = function(id, status) {
+exports.record_event = function(id, type, status) {
     var ref = db.ref("status");
-	if (typeof status === 'string'){}
-	else if (status == 1) {status = true}else {status = false}
+	if (type === 'light'){
+		if (status == 1) {status = true}else {status = false}
+	} else if (type === 'dim'){
+	}
 	var object = {};
 	object[id] = status;
 	ref.child(id).once("value", (snapshot) =>{
