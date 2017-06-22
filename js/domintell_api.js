@@ -71,7 +71,6 @@ client.on('message', (msg, rinfo) => {
             firebase.record_event(id+'-'+i, bitString.charAt(8-i));
         }
         
-        // console.log('from domintell: '+msg.toString()+ ' #'+id+'#'+status);
     } else if (toParse.indexOf('DIM')==0) {
         dim = toParse.substr(4).trim();
         console.log('dim '+dim);
@@ -80,7 +79,7 @@ client.on('message', (msg, rinfo) => {
         for (i=5; i<21;i=i+2){
             index = ((i - 5)/2) +1;
             console.log(id+'-'+index, dim.substr(i,2))
-            firebase.record_event(id+'-'+index, dim.substr(i,2).trim);
+            firebase.record_event(id+'-'+index, dim.substr(i,2).trim());
         }
         
     } else {
