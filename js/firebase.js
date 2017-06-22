@@ -27,7 +27,8 @@ exports.record_module_description = function(id, desc) {
 
 exports.record_event = function(id, status) {
     var ref = db.ref("status");
-	if (status == 1) {status = true}else {status = false}
+	if (typeof status === 'string'){}
+	else if (status == 1) {status = true}else {status = false}
 	var object = {};
 	object[id] = status;
 	ref.child(id).once("value", (snapshot) =>{
