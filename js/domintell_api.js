@@ -42,7 +42,7 @@ client.on('message', (msg, rinfo) => {
 		exports.login();
 	} 	else    if (toParse.indexOf(']')!= -1){
 
-        if (toParse.indexOf('BIR') == 0) {
+        if (toParse.indexOf('BIR') == 0 || toParse.indexOf('DIM') == 0) {
             id = toParse.substr(4,7).trim();
             desc = toParse.substr(11);
             desc = desc.substr(0, desc.indexOf('['));
@@ -73,12 +73,12 @@ client.on('message', (msg, rinfo) => {
         
     } else if (toParse.indexOf('DIM')==0) {
         dim = toParse.substr(4).trim();
-        console.log('dim '+dim);
+        
         id = dim.substr(0,4);
         console.log('id '+id);
         for (i=5; i<21;i=i+2){
             index = ((i - 5)/2) +1;
-            console.log(id+'-'+index, dim.substr(i,2))
+            
             firebase.record_event(id+'-'+index, 'dim', parseInt(dim.substr(i,2).trim(), 16));
         }
         

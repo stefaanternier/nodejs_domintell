@@ -37,7 +37,7 @@ exports.record_event = function(id, type, status) {
 		
 		let rtime = 0 - new Date().getTime();
 		
-		console.log('rtime '+rtime);
+		
 		  if (snapshot.val() !== status) {
 			eventsref.push({id:id, 
 				status: status, 
