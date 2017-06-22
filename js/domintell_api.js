@@ -57,7 +57,7 @@ client.on('message', (msg, rinfo) => {
         
     } else
 
-    if (msg.toString().indexOf('BIR')==0) {
+    if (toParse.indexOf('BIR')==0) {
         console.log('check ' +toParse)
         id = toParse.substr(5,4);
         
@@ -72,10 +72,21 @@ client.on('message', (msg, rinfo) => {
         }
         
         // console.log('from domintell: '+msg.toString()+ ' #'+id+'#'+status);
+    } else if (toParse.indexOf('DIM')==0) {
+        dim = toParse.substr(4).trim();
+        console.log('dim '+dim);
+        id = dim.substr(0,4);
+        console.log('id '+id);
+        for (i=5; i<21;i=i+2){
+            index = ((i - 5)/2) +1;
+            console.log(id+'-'+index, dim.substr(i,2))
+            firebase.record_event(id+'-'+index, dim.substr(i,2).trim);
+        }
+        
     } else {
 //         toParse =  msg.toString();
 //         if (toParse.indexOf('||]')){
-// console.log(msg.toString())
+        console.log('PING todo' +toParse);
 //         }
         
     }
