@@ -17,8 +17,8 @@ exports.dom_event = function (message) {
 		eventname: message.toString()
 	});
 }
-exports.record_module_description = function(id, desc) {
-	var ref = db.ref("modules");
+exports.record_module_description = function(id, desc, dommodule) {
+	var ref = db.ref("modules/"+dommodule);
 	
 	var object = {};
 	object[id] = desc;
