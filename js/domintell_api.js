@@ -51,6 +51,12 @@ client.on('message', (msg, rinfo) => {
                 firebase.record_module_description(id, desc);
             }
             
+        } else if (toParse.indexOf('I20') == 0) {
+            id = toParse.substr(4,7).trim();
+            desc = toParse.substr(11);
+            desc = desc.substr(0, desc.indexOf('['));
+            console.log('schakelaar '+toParse);
+            console.log('schakelaar '+id + ' '+desc);
         } else {
             console.log('APPINFO TODO '+toParse);
         }
