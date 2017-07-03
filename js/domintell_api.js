@@ -55,8 +55,9 @@ client.on('message', (msg, rinfo) => {
             id = toParse.substr(4,7).trim();
             desc = toParse.substr(11);
             desc = desc.substr(0, desc.indexOf('['));
-            console.log('schakelaar '+toParse);
-            console.log('schakelaar '+id + ' '+desc);
+            if (desc.trim()!==''){
+                firebase.record_module_description(id, desc);
+            }
         } else {
             console.log('APPINFO TODO '+toParse);
         }
