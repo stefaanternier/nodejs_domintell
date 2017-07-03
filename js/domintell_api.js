@@ -43,20 +43,22 @@ client.on('message', (msg, rinfo) => {
 	} 	else    if (toParse.indexOf(']')!= -1){
 
         if (toParse.indexOf('BIR') == 0 || toParse.indexOf('DIM') == 0) {
+            dommodule = toParse.substr(0,3);
             id = toParse.substr(4,7).trim();
             desc = toParse.substr(11);
             desc = desc.substr(0, desc.indexOf('['));
             console.log(id+'###'+desc);
             if (desc.trim()!==''){
-                firebase.record_module_description(id, desc);
+                firebase.record_module_description(id, desc, dommodule);
             }
             
-        } else if (toParse.indexOf('I20') == 0) {
+        } else if (toParse.indexOf('I20') == 0|| toParse.indexOf('IS8') == 0|| toParse.indexOf('IS4') == 0) {
+            dommodule = toParse.substr(0,3);
             id = toParse.substr(4,7).trim();
             desc = toParse.substr(11);
             desc = desc.substr(0, desc.indexOf('['));
             if (desc.trim()!==''){
-                firebase.record_module_description(id, desc);
+                firebase.record_module_description(id, desc, dommodule);
             }
         } else {
             console.log('APPINFO TODO '+toParse);
