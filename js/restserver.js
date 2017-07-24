@@ -1,4 +1,6 @@
 var restify = require('restify');
+var audac = require('npm-audac-r2-client').connect('192.168.1.202');
+
 var domi = require('./domintell_api');
 
 var server = restify.createServer({
@@ -65,6 +67,18 @@ server.get('/logout', function (req, res, next) {
 
 server.get('/allOff', function (req, res, next) {
 	domi.allOff();
+	res.send('ok');
+	return next();
+});
+
+server.get('/audio/zone/volume/:zone/:vol', function (req, res, next) {
+	audac.setVolume(req.params.zone,req.params.vol);
+	res.send('ok');
+	return next();
+});
+
+server.get('/audio/zone/input/:zone/:id', function (req, res, next) {
+	audac.setInput(req.params.zone,req.params.id);
 	res.send('ok');
 	return next();
 });
