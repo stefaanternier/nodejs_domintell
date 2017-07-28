@@ -5,6 +5,7 @@ var client = dgram.createSocket('udp4');
 exports.client = client;
 var firebase = require('./firebase');
 // import {firebase} from './firebase';
+exports.firebase = firebase;
 
 var send = function(messageString) {
     var message = new Buffer(messageString);

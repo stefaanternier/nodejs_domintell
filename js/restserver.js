@@ -86,3 +86,11 @@ server.get('/audio/zone/input/:zone/:id', function (req, res, next) {
 server.listen(8980, function () {
 	console.log('%s listening at %s', server.name, server.url);
 });
+
+audac.on('volume',(zone, volume)=>{
+	domi.firebase.record_event('audacVolume_'+zone, 'audacVolume', (-1*volume));
+});
+
+audac.on('routing',(zone, input)=>{
+	domi.firebase.record_event('audacRouting_'+zone, 'audacInput', input);
+});
