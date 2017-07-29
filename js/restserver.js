@@ -94,9 +94,13 @@ server.listen(8980, function () {
 });
 
 audac.on('volume',(zone, volume)=>{
-	domi.firebase.record_event('audacVolume_'+zone, 'audacVolume', (-1*volume));
+	if (!isNaN(volume))	{
+		domi.firebase.record_event('audacVolume_'+zone, 'audacVolume', (-1*volume));
+	}
 });
 
 audac.on('routing',(zone, input)=>{
-	domi.firebase.record_event('audacRouting_'+zone, 'audacInput', input);
+	if (!isNaN(volume))	{	
+		domi.firebase.record_event('audacRouting_'+zone, 'audacInput', input);
+	}
 });
