@@ -100,7 +100,7 @@ audac.on('volume',(zone, volume)=>{
 });
 
 audac.on('routing',(zone, input)=>{
-	if (!isNaN(volume))	{	
+	if (!isNaN(input))	{	
 		domi.firebase.record_event('audacRouting_'+zone, 'audacInput', input);
 	}
 });
