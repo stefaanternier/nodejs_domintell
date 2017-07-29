@@ -53,6 +53,12 @@ server.get('/screens/:id', function (req, res, next) {
 	return next();
 });
 
+server.get('/mem/:id', function (req, res, next) {
+	domi.mem(req.params.id);
+	res.send('ok');
+	return next();
+});
+
 server.get('/ping', function (req, res, next) {
 	domi.ping();
 	res.send('ok');

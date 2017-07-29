@@ -28,6 +28,7 @@ exports.dim =  (id, perc) => send('DIM  ' + id+'%D'+perc);
 
 exports.screens = (id) =>  send('TRV  ' + id);
 
+exports.mem = (id) =>  send('MEM00000' + id);
 
 exports.allOff =  (id) => send('MEM000006%O' );
 
